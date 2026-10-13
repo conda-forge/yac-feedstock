@@ -12,7 +12,7 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/pism/{{ name }}-mirror/archive/v{{ version }}.tar.gz
+  url: https://github.com/pism/${{ name }}-mirror/archive/v${{ version }}.tar.gz
   sha256: 9b8450b7783826271f02021d0ad39ed389e4afc993f79189ebb3154c028f3a0d
 
 build:
