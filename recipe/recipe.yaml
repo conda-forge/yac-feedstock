@@ -3,7 +3,7 @@ schema_version: 1
 context:
   name: yac
   version: "3.15.0_p1"
-  build: 0
+  build: 1
   mpi: ${{ mpi | default("mpich") }}
   mpi_prefix: mpi_${{ mpi }}
 
@@ -12,8 +12,8 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://gitlab.dkrz.de/dkrz-sw/${{ name }}/-/archive/v${{ version }}/${{ name }}-v${{ version }}.tar.gz
-  sha256: c5f9378dcf343f8b830d4571b4ebd71fc446634d8c6cf633b0be790b5ac189d8
+  url: https://github.com/pism/${{ name }}-mirror/archive/v${{ version }}.tar.gz
+  sha256: 9b8450b7783826271f02021d0ad39ed389e4afc993f79189ebb3154c028f3a0d
 
 build:
   number: ${{ build }}
