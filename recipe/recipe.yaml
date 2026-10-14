@@ -3,7 +3,7 @@ schema_version: 1
 context:
   name: yac
   version: "3.15.0_p1"
-  build: 1
+  build: 2
   mpi: ${{ mpi | default("mpich") }}
   mpi_prefix: mpi_${{ mpi }}
 
@@ -45,6 +45,7 @@ requirements:
       then:
         - libopenblas * *openmp*
     - python
+    - libpython
     - pip
     - setuptools
     - yaxt * ${{ mpi_prefix }}_*
@@ -60,6 +61,7 @@ requirements:
     - mpi4py
     - numpy
     - python
+    - libpython
     - yaxt * ${{ mpi_prefix }}_*
 
   ignore_run_exports:
