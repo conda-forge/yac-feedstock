@@ -45,6 +45,7 @@ requirements:
       then:
         - libopenblas * *openmp*
     - python
+    - libpython
     - pip
     - setuptools
     - yaxt * ${{ mpi_prefix }}_*
@@ -60,6 +61,7 @@ requirements:
     - mpi4py
     - numpy
     - python
+    - libpython
     - yaxt * ${{ mpi_prefix }}_*
 
   ignore_run_exports:
