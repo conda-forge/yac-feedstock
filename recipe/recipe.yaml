@@ -2,8 +2,8 @@ schema_version: 1
 
 context:
   name: yac
-  version: "3.15.0_p1"
-  build: 2
+  version: "3.21.0"
+  build: 0
   mpi: ${{ mpi | default("mpich") }}
   mpi_prefix: mpi_${{ mpi }}
 
@@ -13,7 +13,7 @@ package:
 
 source:
   url: https://github.com/pism/${{ name }}-mirror/archive/v${{ version }}.tar.gz
-  sha256: 9b8450b7783826271f02021d0ad39ed389e4afc993f79189ebb3154c028f3a0d
+  sha256: 5079e65480b701b5b622505154c8fa2738de1dfdb9500f126096783e5968da1c
 
 build:
   number: ${{ build }}
