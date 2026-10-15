@@ -3,7 +3,7 @@ schema_version: 1
 context:
   name: yac
   version: "3.15.0_p1"
-  build: 2
+  build: 3
   mpi: ${{ mpi | default("mpich") }}
   mpi_prefix: mpi_${{ mpi }}
 
