@@ -34,17 +34,17 @@ requirements:
     - cmake
     - make
     - pkg-config
-    - if: build_platform != target_platform
+    - if: build_platform != host_platform
       then:
         # openmpi's mpicc/mpifort wrappers are compiled binaries for the target
         # arch; when cross-compiling (e.g. osx-64 -> osx-arm64) they can't run on
         # the build machine, so we need a build-arch copy of openmpi too (mpich's
         # wrappers are portable shell scripts and don't need this). Same pattern
         # as conda-forge/libpnetcdf-feedstock.
-        - if: (mpi == "openmpi")
+        - if: mpi == "openmpi"
           then:
             - ${{ mpi }}
-        - cross-python_${{ target_platform }}
+        - cross-python_${{ host_platform }}
         - python
         - cython
         - numpy
@@ -88,7 +88,7 @@ requirements:
 tests:
   - python:
       imports:
-        - if: build_platform == target_platform
+        - if: build_platform == host_platform
           then:
             - yac
       pip_check: true
