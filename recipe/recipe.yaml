@@ -39,15 +39,15 @@ requirements:
     # the build machine, so we need a build-arch copy of openmpi too (mpich's
     # wrappers are portable shell scripts and don't need this). Same pattern
     # as conda-forge/libpnetcdf-feedstock.
-
     - if: build_platform != target_platform
       then:
-      - if: mpi == "openmpi"
-        then: {{ mpi }}
-      - cross-python_${{ target_platform }}
-      - python
-      - cython
-      - numpy
+        - if: (mpi == "openmpi")
+          then:
+            - ${{ mpi }}
+        - cross-python_${{ target_platform }}
+        - python
+        - cython
+        - numpy
   host:
     - cython
     - ${{ mpi }}
