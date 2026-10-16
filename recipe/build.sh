@@ -26,6 +26,9 @@ else
   export FC=mpifort
 fi
 
+Python_INCLUDE_DIR="$(python -c 'import sysconfig; print(sysconfig.get_path("include"))')"
+Python_NumPy_INCLUDE_DIR="$(python -c 'import numpy; print(numpy.get_include())')"
+
 cmake -B build -S . \
       -DCMAKE_INSTALL_PREFIX=${PREFIX} \
       -DCMAKE_BUILD_TYPE=Release \
@@ -36,8 +39,10 @@ cmake -B build -S . \
       -DYAC_ENABLE_TOOLS=OFF \
       -DYAC_ENABLE_MPI_CHECKS=OFF \
       -DYAC_LAPACK_INTERFACE=system \
-      -DPython3_EXECUTABLE=${PYTHON} \
-      -DPython3_FIND_STRATEGY=LOCATION
+      -DPython3_FIND_STRATEGY=LOCATION \
+      -DPython3_EXECUTABLE:PATH=${PYTHON} \
+      -DPython3_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR} \
+      -DPython3_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}
 
 cmake --build build -j ${CPU_COUNT}
 
