@@ -88,9 +88,11 @@ requirements:
 tests:
   - python:
       imports:
-        - yac
+        - if: build_platform == target_platform
+          then:
+            - yac
+      pip_check: true
   - script:
-      - pip check
       - if: linux
         then:
           - test -f ${PREFIX}/lib/libyac_core.so
