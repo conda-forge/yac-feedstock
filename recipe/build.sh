@@ -47,3 +47,8 @@ cmake -B build -S . \
 cmake --build build -j ${CPU_COUNT}
 
 cmake --install build
+
+# Since YAC 3.21.0, `cmake --install` no longer installs the Python bindings
+# (only scikit-build builds do). Instead, CMake generates build/python/setup.py,
+# which copies the prebuilt extension modules into site-packages.
+${PYTHON} -m pip install ./build/python --no-deps --no-build-isolation -vv
