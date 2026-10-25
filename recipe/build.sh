@@ -48,6 +48,16 @@ cmake --build build -j ${CPU_COUNT}
 
 cmake --install build
 
+# On macOS, CMake's FindLAPACK reports Accelerate as the framework's absolute path inside
+# the build SDK (e.g. /opt/conda-sdks/MacOSX11.0.sdk/.../Accelerate.framework), and YAC
+# writes that into its pkg-config files. The path does not exist on users' machines, so
+# downstream links via `pkg-config --libs yac-mci` fail. Use the portable linker flag.
+if [[ "${target_platform}" == osx-* ]]; then
+  sed -i.bak -E 's|[^[:space:]]*/Accelerate\.framework[^[:space:]]*|-framework Accelerate|g' \
+    "${PREFIX}"/lib/pkgconfig/yac-*.pc
+  rm -f "${PREFIX}"/lib/pkgconfig/yac-*.pc.bak
+fi
+
 # Since YAC 3.21.0, `cmake --install` no longer installs the Python bindings
 # (only scikit-build builds do). Instead, CMake generates build/python/setup.py,
 # which copies the prebuilt extension modules into site-packages.

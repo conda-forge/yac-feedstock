@@ -3,7 +3,7 @@ schema_version: 1
 context:
   name: yac
   version: "3.21.0"
-  build: 0
+  build: 1
   mpi: ${{ mpi | default("mpich") }}
   mpi_prefix: mpi_${{ mpi }}
 
@@ -103,6 +103,9 @@ tests:
           - test -f ${PREFIX}/lib/libyac_core.dylib
           - test -f ${PREFIX}/lib/libyac_mci.dylib
           - test -f ${PREFIX}/lib/libyac_utils.dylib
+          # pkg-config files must not carry the build SDK's absolute Accelerate path
+          - test -z "$(grep -l 'Accelerate\.framework' ${PREFIX}/lib/pkgconfig/yac-*.pc)"
+          - grep -q -- '-framework Accelerate' ${PREFIX}/lib/pkgconfig/yac-core.pc
       - test -f ${PREFIX}/include/yac.h
       - test -f ${PREFIX}/include/yac_core.h
     requirements:
